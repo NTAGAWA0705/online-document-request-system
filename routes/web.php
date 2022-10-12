@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,7 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::get('/students', [StudentController::class, 'renderStudentList'])->name('all_students');
 Route::get('/students/new', [StudentController::class, 'renderNewStudentForm'])->name('new_student');
 Route::post('/students/new', [StudentController::class, 'createStudent']);
+
+Route::get('/requests', [DocumentRequestController::class, 'renderAllRequests']);
+Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm']);
+Route::post('/requests/transcripts/new', [DocumentRequestController::class, '']);
