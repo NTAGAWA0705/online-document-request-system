@@ -53,8 +53,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (isset( $allStudents) && count($allStudents) > 0)
-                                    @foreach ($allStudents as $student)
+                                @if (isset( $allUsers) && count($allUsers) > 0)
+                                    @foreach ($allUsers as $student)
                                         <tr>
                                             <td>{{ $student['ref_number'] }}</td>
                                             <td>{{ $student['first_name'] . " " . $student['last_name'] }}</td>

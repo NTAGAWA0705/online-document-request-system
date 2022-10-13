@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use function Termwind\render;
@@ -13,7 +14,7 @@ class LoginController extends Controller
         return view('users.login');
     }
 
-    public function login(Request $request)
+    public function loginUser(Request $request)
     {
         $request->validate([
             'email' => 'email|required',
@@ -25,14 +26,19 @@ class LoginController extends Controller
         } else
             $remember = false;
 
-        if (!auth()->attempt([
+        $email = $request->email;
+        $password = bcrypt($request->password);
+
+        // dd($email, $password);
+
+        if (auth()->attempt([
             'email_addr' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
         ], $remember)) {
+            return redirect('/')->with('welcome', "Welcome ");
+        } else {
             return back()->with('error', __('Email address or password is incorrect'));
         }
-
-        return redirect('/')->with('welcome', 'Welcome ');
     }
 
     /**

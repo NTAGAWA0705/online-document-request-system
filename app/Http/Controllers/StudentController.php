@@ -11,7 +11,10 @@ class StudentController extends Controller
 {
     public function renderStudentList()
     {
-        return view('students.list_all');
+        $allStudents = Student::all();
+        return view('students.list_all', [
+            'allStudents' => $allStudents
+        ]);
     }
 
     public function createStudent(Request $request)
@@ -27,6 +30,8 @@ class StudentController extends Controller
             'reg_number' => ['required',  Rule::unique('students', 'ref_number')],
             'password' => 'max:255'
         ]);
+
+        // dd(bcrypt($request->password));
 
         $user = User::create([
             'email_addr' => $request->email,

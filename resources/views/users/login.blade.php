@@ -53,7 +53,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="{{__('input your email address')}}" value="{{ old('email') }}" name="email" id="email" class="form-control @error('email') border-danger @enderror">
+                        <input type="email" placeholder="{{__('input your email address')}}" value="{{ old('email') }}" name="email" id="email" class="form-control @error('email') border-danger @enderror">
                         @error('email')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror

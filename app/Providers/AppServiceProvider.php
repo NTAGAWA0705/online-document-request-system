@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Should return TRUE or FALSE
+        Gate::define('manage_users', function (User $user) {
+            return $user->user_type === 'admin';
+        });
+
+        // Should return TRUE or FALSE
+        Gate::define('request_document', function (User $user) {
+            return $user->user_type === 'student';
+        });
     }
 }
