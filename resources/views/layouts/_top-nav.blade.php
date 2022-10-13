@@ -20,7 +20,7 @@
                                 <img src="{{ asset('images/avatar.jpg') }}" alt="" class="user-avatar-md rounded-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
-                                <div class="nav-user-info" style="background-color: rgb(255, 55, 0);">
+                                <div class="nav-user-info" style="background-color: rgb(39, 28, 104);">
                                     <h5 class="mb-0 text-white nav-user-name">
                                         @php
                                         $user = auth()->user();

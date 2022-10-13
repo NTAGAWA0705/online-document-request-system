@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('dashboard.dashboard');
-})->name('home');
+})->name('home')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'renderLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'loginUser']);
