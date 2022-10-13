@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('studentRequestDocuments', function (Blueprint $table) {
+        Schema::create('generateddocs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('document_request_id')->constrained('document_requests')->onDelete('set null');
-            $table->foreignId('doctype_id')->constrained()->onDelete('cascade');
+            $table->foreignId('docsinrequest_id')->constrained('docsinrequest', 'id')->onDelete('cascade');
+            $table->string('doc_url')->nullable();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student_request_documents');
+        Schema::dropIfExists('generateddocs');
     }
 };

@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('doctypes', function (Blueprint $table) {
+        Schema::create('documentrequests', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->string('name');
-            $table->string('description');
+            $table->string('status')->nullable();
+            $table->foreignId('student_id')->constrained('students', 'id')->cascadeOnDelete();
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('doctypes');
+        Schema::dropIfExists('documentrequests');
     }
 };
