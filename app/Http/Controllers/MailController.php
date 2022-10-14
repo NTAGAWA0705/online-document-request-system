@@ -41,7 +41,7 @@ class MailController extends Controller
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'mail.showrwanda.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'remycyuzuzo@gmail.com';                     //SMTP username
+            $mail->Username   = 'odrs@showrwanda.com';                     //SMTP username
             $mail->Password   = env('MAIL_PASSWORD');                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
             $mail->Port       = 2079;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
