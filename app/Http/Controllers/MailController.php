@@ -41,15 +41,15 @@ class MailController extends Controller
             $mail->isSMTP();                                            //Send using SMTP
             $mail->Host       = 'mail.showrwanda.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-            $mail->Username   = 'remycyuzuzo@gmail.com';                     //SMTP username
+            $mail->Username   = 'odrs@showrwanda.com';                     //SMTP username
             $mail->Password   = env('MAIL_PASSWORD');                               //SMTP password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-            $mail->Port       = 2079;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
             //Recipients
-            $mail->setFrom('noreply@showrwanda.com', 'ODRS Automated mailer');
+            $mail->setFrom('odrs@showrwanda.com', 'ODRS Automated mailer');
             $mail->addAddress('ntagawa0705@gmail.com', 'Mr. Ntagawa Innocent');     //Add a recipient
-            $mail->addAddress('remycyuzuzo@gmail.com');               //Name is optional
+            // $mail->addAddress('remycyuzuzo@gmail.com');               //Name is optional
             $mail->addReplyTo('odrs+remycyuzuzo@gmail.com', 'ODRS');
 
 
