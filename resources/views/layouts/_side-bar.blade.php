@@ -14,7 +14,7 @@
                                 <a href="{{ route('home') }}"><img class="logo-img" src="{{ asset('images/odrs logo.png') }}" alt="logo"></a>
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('home') }}" style="background-color: rgb(27, 31, 61);"><i class="fa fa-fw fa-tachometer-alt"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="{{ route('home') }}" style="background-color: rgb(27, 31, 61);"><i class="fa fa-fw fa-tachometer-alt"></i>Dashboard</a>
                             </li>
 
                             <li class="nav-item ">
@@ -27,7 +27,15 @@
                             @endcan
 
                             <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student <span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('allUsers') }}"><i class="fa fa-fw fa-user-graduate"></i>Users</a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('settings') }}"><i class="fa fa-fw fa-user-graduate"></i>My settings</a>
                             </li>
                             
                             {{-- <li class="nav-item">

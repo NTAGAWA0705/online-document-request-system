@@ -9,6 +9,9 @@ use function Termwind\render;
 
 class LoginController extends Controller
 {
+
+
+
     public function renderLogin(Request $req)
     {
         return view('users.login');

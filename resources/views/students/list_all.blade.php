@@ -43,12 +43,10 @@
                         <table class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID No.</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Full Name</th>
-                                    <th scope="col">Year</th>
-                                    <th scope="col">Contact</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Account</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>

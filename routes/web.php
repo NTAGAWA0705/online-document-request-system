@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,17 +24,24 @@ Route::get('/', function () {
     return view('dashboard.dashboard');
 })->name('home')->middleware('auth');
 
-Route::get('/login', [LoginController::class, 'renderLogin'])->name('login');
-Route::post('/login', [LoginController::class, 'loginUser']);
+Route::get('/login', [LoginController::class, 'renderLogin'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'loginUser'])->middleware('guest');
 
 // Students
-Route::get('/students', [StudentController::class, 'renderStudentList'])->name('all_students');
-Route::get('/students/new', [StudentController::class, 'renderNewStudentForm'])->name('new_student');
-Route::post('/students/new', [StudentController::class, 'createStudent']);
+Route::get('/students', [StudentController::class, 'renderStudentList'])->name('all_students')->middleware('auth');
+Route::get('/students/new', [StudentController::class, 'renderNewStudentForm'])->name('new_student')->middleware('auth');
+Route::post('/students/new', [StudentController::class, 'createStudent'])->middleware('auth');
 
-Route::get('/requests', [DocumentRequestController::class, 'renderAllRequests'])->name('requests');
-Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm'])->name('newTranscriptForm');
-Route::post('/requests/transcripts/new', [DocumentRequestController::class, '']);
+Route::get('/requests', [DocumentRequestController::class, 'renderAllRequests'])->name('requests')->middleware('auth');
+Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm'])->name('newTranscriptForm')->middleware('auth');
+Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'createNewTranscript'])->middleware('auth');
+
+// users
+Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
+Route::get('/settings', [UserController::class, 'renderSettingPage'])->name('settings')->middleware('auth');
+Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
 
 
-Route::get('/mail', [MailController::class, 'txt_mail']);
+
+// testing
+Route::get('/mail', [MailController::class, 'html_mail']);

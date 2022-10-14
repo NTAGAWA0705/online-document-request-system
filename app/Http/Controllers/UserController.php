@@ -14,4 +14,18 @@ class UserController extends Controller
             'allUsers' => $allUsers
         ]);
     }
+
+    public function renderSettingPage()
+    {
+        $user_data = [];
+
+        return view('users.settings', [
+            'user_data' => $user_data,
+        ]);
+    }
+
+    public function renderNewUserForm()
+    {
+        return view('users.settings');
+    }
 }
