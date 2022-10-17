@@ -26,6 +26,7 @@ Route::get('/', function () {
 
 Route::get('/login', [LoginController::class, 'renderLogin'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'loginUser'])->middleware('guest');
+Route::post('/logout', [LoginController::class, 'logout']);
 
 // Students
 Route::get('/students', [StudentController::class, 'renderStudentList'])->name('all_students')->middleware('auth');
@@ -39,7 +40,7 @@ Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'cre
 // users
 Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
 Route::get('/settings', [UserController::class, 'renderSettingPage'])->name('settings')->middleware('auth');
-Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
+Route::get('/users/new', [UserController::class, 'create'])->name('new_user')->middleware('auth');
 
 
 

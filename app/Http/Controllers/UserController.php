@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -24,8 +25,11 @@ class UserController extends Controller
         ]);
     }
 
-    public function renderNewUserForm()
+    public function create()
     {
-        return view('users.settings');
+        $departments = Department::all();
+        return view('users.new-user', [
+            'departments' => $departments
+        ]);
     }
 }

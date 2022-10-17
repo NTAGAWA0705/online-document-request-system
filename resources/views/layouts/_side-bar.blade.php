@@ -33,10 +33,58 @@
                                     <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student</a>
                                 </li>                                    
                             @endcan
-                            @can('view_users')
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{{ route('allUsers') }}"><i class="fa fa-fw fa-user-graduate"></i>Users</a>
-                                </li>                                    
+                            @can('view_users')    
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                        <i class="fas fa-fw fa-chart-pie"></i> Users
+                                    </a>
+                                    <div id="submenu-8" class="collapse submenu">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="{{ route('allUsers') }}">All users</a>
+                                            </li>
+                                            @can('create_courses')
+                                                <li class="nav-item">
+                                                    <a class="nav-link" href="status-report.html">New user</a>
+                                                </li>                                                
+                                            @endcan
+                                        </ul>
+                                    </div>
+                                </li>                              
+                            @endcan
+                            @can('manage_courses')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                    <i class="fas fa-fw fa-chart-pie"></i> Manage Courses
+                                </a>
+                                <div id="submenu-8" class="collapse submenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('allUsers') }}">All courses</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">Create new course</a>
+                                        </li>                                                
+                                    </ul>
+                                </div>
+                            </li> 
+                            @endcan
+                            @can('manage_departments')
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                    <i class="fas fa-fw fa-chart-pie"></i> Manage Departments
+                                </a>
+                                <div id="submenu-8" class="collapse submenu">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('allUsers') }}">All departments</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="">Create new department</a>
+                                        </li>                                                
+                                    </ul>
+                                </div>
+                            </li> 
                             @endcan
 
                             <li class="nav-item ">

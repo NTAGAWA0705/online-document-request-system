@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasOne(Student::class);
     }
+
+    public function admin()
+    {
+        return $this->hasOne(SystemAdministrator::class);
+    }
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class);
+    }
 }
