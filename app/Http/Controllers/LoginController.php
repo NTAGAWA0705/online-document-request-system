@@ -29,11 +29,6 @@ class LoginController extends Controller
         } else
             $remember = false;
 
-        $email = $request->email;
-        $password = bcrypt($request->password);
-
-        // dd($email, $password);
-
         if (auth()->attempt([
             'email_addr' => $request->email,
             'password' => $request->password,

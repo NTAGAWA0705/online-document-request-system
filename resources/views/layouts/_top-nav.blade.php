@@ -24,12 +24,12 @@
                                     <h5 class="mb-0 text-white nav-user-name">
                                         @php
                                         $user = auth()->user();
-                                        $user_type = $user->user_type;
-                                        echo $user->$user_type->first_name . ' ' . $user->$user_type->last_name
+                                        // $user_type = $user->user_type;
+                                        // echo $user->$user_type->first_name . ' ' . $user->$user_type->last_name
                                             
                                         @endphp
                                         </h5>
-                                    <span class="status"></span><span class="ml-2">{{ $user->userrole }}</span>
+                                    {{-- <span class="status"></span><span class="ml-2">{{ $user->userrole }}</span> --}}
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>

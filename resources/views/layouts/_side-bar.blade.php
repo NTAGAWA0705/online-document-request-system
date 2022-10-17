@@ -17,22 +17,27 @@
                                 <a class="nav-link" href="{{ route('home') }}" style="background-color: rgb(27, 31, 61);"><i class="fa fa-fw fa-tachometer-alt"></i>Dashboard</a>
                             </li>
 
+                            @can('request_document')
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('requests') }}"><i class="fa fa-fw fa-certificate"></i>Request document </a>
                             </li>
+                            @endcan
                             @can('request_document')
                                 <li class="nav-item ">
                                     <a class="nav-link" href="{{ route('requests') }}"><i class="fa fa-fw fa-certificate"></i>My documents </a>
                                 </li>
                             @endcan
 
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student</a>
-                            </li>
-
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('allUsers') }}"><i class="fa fa-fw fa-user-graduate"></i>Users</a>
-                            </li>
+                            @can('add_new_students')
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student</a>
+                                </li>                                    
+                            @endcan
+                            @can('view_users')
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('allUsers') }}"><i class="fa fa-fw fa-user-graduate"></i>Users</a>
+                                </li>                                    
+                            @endcan
 
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('settings') }}"><i class="fa fa-fw fa-user-graduate"></i>My settings</a>
