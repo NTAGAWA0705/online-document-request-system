@@ -45,7 +45,7 @@
                                             </li>
                                             @can('create_courses')
                                                 <li class="nav-item">
-                                                    <a class="nav-link" href="status-report.html">New user</a>
+                                                    <a class="nav-link" href="{{ route('new_user') }}">New user</a>
                                                 </li>                                                
                                             @endcan
                                         </ul>

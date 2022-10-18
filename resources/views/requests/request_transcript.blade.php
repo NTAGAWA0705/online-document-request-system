@@ -3,7 +3,7 @@
 @section('main')
     
 <section class="multi_step_form">  
-    <form id="msform" method="POST" action="{{ route('newTranscriptForm') }}"> 
+    <form id="msform" method="POST" action="{{ route('newTranscriptForm') }}" enctype="multipart/form-data"> 
         @csrf
       <!-- Tittle -->
       <div class="tittle">
@@ -21,7 +21,7 @@
         <h3>Select transcripts</h3>
         <div class="form-group">
             <label for="transcripts">Select your transcripts</label>
-            <select name="transcripts[]" id="transcripts" class="form-control" multiple>
+            <select name="transcripts[]" id="transcripts" class="form-control select-docs" multiple>
                 <option value="1">1<up>st</up> year</option>
                 <option value="2">2<up>nd</up> year</option>
                 <option value="3">3<up>rd</up> year</option>
@@ -42,6 +42,9 @@
                   Choose file
               </label>
             <input type="file" class="form-control" name="proof" id="upload">
+            @error('proof')
+                {{ $message }}
+            @enderror
           </div>
         </div>
         <div class="form-group">
@@ -64,10 +67,6 @@
             <label for="bank_name">Bank name</label>
             <input type="text" class="form-control" name="bank_name" id="bank_name">
         </div>
-        <div class="form-group">
-            <label for="payer_name">Payer name (name on the document)</label>
-            <input type="text" class="form-control" name="payer_name" id="payer_name">
-        </div>
         <button type="button" class="action-button previous previous_button">Back</button>
         <button type="button" class="next action-button">Continue</button>  
       </fieldset>  
@@ -86,7 +85,8 @@
 @endsection
     
     @section('head')
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+ 
     <style>
         /*font Variables*/
         /*Color Variables*/
@@ -417,6 +417,15 @@
     @endsection
 
     @section('foot')
+
+<script>
+       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    $(document).ready(function() {
+        $('.select-docs').select2();
+    });
+</script>
+
         <script>
 (function($) {
     "use strict";  

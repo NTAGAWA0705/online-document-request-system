@@ -27,6 +27,12 @@
         <!-- ============================================================== -->
         <!-- end pageheader -->
         <!-- ============================================================== -->
+        @if (session('usr.success'))
+            <div class="alert alert-success">{{ session('usr.success') }}</div>
+        @endif
+        @if (session('usr.fail'))
+            <div class="alert alert-warn">{{ session('usr.fail') }}</div>
+        @endif
 
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -73,14 +79,15 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-12 col-sm-3 col-form-label text-sm-right">Department <span class="text-danger">*</span></label>
+                                <label class="col-12 col-sm-3 col-form-label text-sm-right">Department</label>
                                 <div class="col-12 col-sm-8 col-lg-6">
-                                    <select name="user_type" class="form-control" id="user_type">
+                                    <select name="dep_id" class="form-control" id="dept">
                                         <option disabled selected>N/A</option>
-                                        <option value="finance">Finance Officer</option>
-                                        <option value="department">Department admin</option>
-                                        <option value="vlac">Top academic officer / VLAC</option>
-                                        <option value="admin">System Administrator</option>
+                                        @if (isset($departments))
+                                            @foreach ($departments as $department)
+                                                <option value="{{ $department['id'] }}">{{ $department['department_name'] }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
                                 </div>
                             </div>

@@ -41,6 +41,7 @@ Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'cre
 Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
 Route::get('/settings', [UserController::class, 'renderSettingPage'])->name('settings')->middleware('auth');
 Route::get('/users/new', [UserController::class, 'create'])->name('new_user')->middleware('auth');
+Route::post('/users/new', [UserController::class, 'store'])->middleware('auth');
 
 
 

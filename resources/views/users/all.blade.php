@@ -16,7 +16,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Users</li>
+                            <li class="breadcrumb-item active" aria-current="page">user</li>
                         </ol>
                     </nav>
                 </div>
@@ -43,24 +43,27 @@
                         <table class="table table-striped table-bordered first">
                             <thead>
                                 <tr>
-                                    <th scope="col">ID No.</th>
+                                    <th scope="col">#</th>
                                     <th scope="col">Full Name</th>
-                                    <th scope="col">Year</th>
-                                    <th scope="col">Contact</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Account</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if (isset( $allUsers) && count($allUsers) > 0)
+                                    @php
+                                        $i = 1;
+                                    @endphp
                                     @foreach ($allUsers as $user)
+                                        @php
+                                            $user_type = $user['user_type'];
+                                        @endphp
                                         <tr>
-                                            <td>{{ $user['ref_number'] }}</td>
-                                            <td>{{ $user['first_name'] . " " . $user['last_name'] }}</td>
-                                            <td>{{ '' }}</td>
-                                            <td>{{ $user['ref_number'] }}</td>
-                                            <td>{{ $user->user->email_addr }}</td>
+                                            <td>{{ $i++ }}</td>
+                                            <td>{{ ($user->$user_type !== NULL) ? $user->$user_type->first_name . " " . $user->$user_type->last_name : "N/A" }}</td>
+                                            <td>{{ $user['email_addr'] }}</td>
+                                            <td>{{ $user['user_type'] }}</td>
                                             <td>
                                                 @if ($user['status'] === 0)
                                                     <span class="badge bg-danger text-white">disabled</span>                                                    

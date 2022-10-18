@@ -9,6 +9,8 @@ class Docsinrequest extends Model
 {
     use HasFactory;
 
+    protected $table = "docsinrequest";
+
     protected $fillable = [
         'documentrequest_id',
         'doctype_id',

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Docsinrequest;
-use App\Models\Documentrequest;
-use App\Models\ProofOfPayment;
 use Illuminate\Http\Request;
+use App\Models\Docsinrequest;
+use App\Models\ProofOfPayment;
+use App\Models\Documentrequest;
+use Illuminate\Validation\Rules\File;
 
 class DocumentRequestController extends Controller
 {
@@ -24,10 +25,12 @@ class DocumentRequestController extends Controller
     {
         $formData = $request->validate([
             'transcripts' => 'required',
-            'proof' => 'required',
             'std_name' => 'required',
             'amount' => 'required',
-            'payer_name' => 'required',
+            'proof' =>
+            File::types(['jpg', 'png', 'pdf', 'doc', 'docx'])
+                ->max(3 * 1024),
+
         ]);
 
         // dd(bcrypt($request->password));
@@ -42,11 +45,17 @@ class DocumentRequestController extends Controller
                 Docsinrequest::create([
                     'documentrequest_id' => $requests->id,
                     'doctype_id' => 1,
+                    'college_year' => $transcript
                 ]);
             }
         }
+        if ($request->file('proof')) {
+            $file = $request->file('proof');
+            $fileName = time() . '_' . uniqid() . $file->getClientOriginalName();
+            $filePath = $request->file('proof')->storeAs('uploads', $fileName, 'public');
+        }
 
-        $file_url = '';
+        $file_url = $filePath;
 
         $requests = ProofOfPayment::create([
             'student_id' => auth()->user()->student->id,
@@ -62,6 +71,6 @@ class DocumentRequestController extends Controller
         ]);
 
 
-        return redirect('/students')->with('success', 'the new student registered successfully');
+        return redirect('/requests')->with('success', 'your new transcripts has been ordered');
     }
 }
