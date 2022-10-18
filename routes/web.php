@@ -40,7 +40,8 @@ Route::get('/requests/tracker/{request_id}', [DocumentRequestController::class, 
 Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm'])->name('newTranscriptForm')->middleware('auth');
 Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'createNewTranscript'])->middleware('auth');
 
-Route::get('/student-requests', [DocumentRequestController::class, 'viewStudentRequests']);
+Route::get('/student-requests', [DocumentRequestController::class, 'viewStudentRequests'])->middleware('auth');
+Route::post('/approve-student-request', [DocumentRequestController::class, 'approveDocuments'])->middleware('auth');
 
 Route::get('/my-documents', [DocumentsController::class, 'showUserDocuments'])->name('myDocuments')->middleware('auth');
 // users

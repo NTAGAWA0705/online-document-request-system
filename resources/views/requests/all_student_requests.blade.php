@@ -102,8 +102,20 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            <a href="" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Approve</a>
-                                            <a href="" class="btn btn-light border"><i class="fas fa-times-circle"></i> Reject</a>
+                                            <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
+                                                <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
+                                                <input type="hidden" name="is_approved" value="1">
+                                                <input type="hidden" name="request_id" value="{{ $request['id'] }}">
+                                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Approve</button>
+                                                @csrf
+                                            </form>
+                                            <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
+                                                <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
+                                                <input type="hidden" name="is_approved" value="0">                                                
+                                                <input type="hidden" name="request_id" value="{{ $request['id'] }}">
+                                                <button type="submit" class="btn btn-light border"><i class="fas fa-times-circle"></i> Reject</button>
+                                                @csrf
+                                            </form>
                                             <a href="/requests/tracker/{{ $request['id'] }}" class="btn btn-light btn-sm">View status</a>
                                         </td>
                                     </tr>                                    

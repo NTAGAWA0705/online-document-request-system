@@ -18,9 +18,9 @@
                             </li>
 
                             @can('request_document')
-                            <li class="nav-item ">
-                                <a class="nav-link" href="{{ route('requests') }}"><i class="fa fa-fw fa-certificate"></i>Request document </a>
-                            </li>
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('requests') }}"><i class="fa fa-fw fa-certificate"></i>Request document </a>
+                                </li>
                             @endcan
                             @can('request_document')
                                 <li class="nav-item ">

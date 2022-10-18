@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Approval;
 use Illuminate\Http\Request;
 use App\Models\Docsinrequest;
 use App\Models\ProofOfPayment;
@@ -87,9 +88,30 @@ class DocumentRequestController extends Controller
 
     public function viewStudentRequests()
     {
-        $userRequests = Documentrequest::all();
+        $approval_level = 0;
+        if (auth()->user()->userrole === "finance") {
+            $approval_level = 1;
+        } elseif (auth()->user()->userrole === "vlac") {
+            $approval_level = 2;
+        }
+
+        $can_be_approved = Approval::all()->where('approval_level', '=', $approval_level)->where('request_id', '=', 5)->count();
+
+        $userRequests = Documentrequest::all()->where('status', '<=', $approval_level);
+
         return view('requests.all_student_requests', [
             'studentsRequests' => $userRequests,
+            'levelApproval' => $approval_level,
+            'can_be_approved' => $can_be_approved,
         ]);
+    }
+
+    public function approveDocuments(Request $request)
+    {
+        $approvalLevel = $request->approvalLevel;
+        $is_approved = $request->is_approved;
+        $request_id = $request->request_id;
+
+        dd($approvalLevel, $request_id);
     }
 }
