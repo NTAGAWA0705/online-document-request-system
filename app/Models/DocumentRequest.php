@@ -20,4 +20,14 @@ class Documentrequest extends Model
     {
         return $this->hasMany(Docsinrequest::class);
     }
+
+    public function proof()
+    {
+        return $this->hasOne(ProofOfPayment::class);
+    }
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
 }

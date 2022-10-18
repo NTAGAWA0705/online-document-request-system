@@ -53,6 +53,7 @@ class UserController extends Controller
 
         // dd(bcrypt($request->password));
         $userrole = "";
+
         if ($request->user_type === 'finance') {
             $userrole = "Finance Officer";
         } elseif ($request->user_type === 'department') {
@@ -81,7 +82,7 @@ class UserController extends Controller
         ];
 
         if ($request->user_type !== 'admin') {
-            $user_info['role'] = $request->user_type;
+            $user_info['role'] = 'staff';
             $staff = Staff::create($user_info);
             if ($request->user_type === "department" && $request->dep_id != "") {
                 DepartmentStaff::create([

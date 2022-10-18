@@ -84,4 +84,12 @@ class DocumentRequestController extends Controller
             'status' => $status,
         ]);
     }
+
+    public function viewStudentRequests()
+    {
+        $userRequests = Documentrequest::all();
+        return view('requests.all_student_requests', [
+            'studentsRequests' => $userRequests,
+        ]);
+    }
 }

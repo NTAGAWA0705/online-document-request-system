@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendMailController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentRequestDocumentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,6 +39,8 @@ Route::get('/requests', [DocumentRequestController::class, 'renderAllRequests'])
 Route::get('/requests/tracker/{request_id}', [DocumentRequestController::class, 'renderTracker']);
 Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm'])->name('newTranscriptForm')->middleware('auth');
 Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'createNewTranscript'])->middleware('auth');
+
+Route::get('/student-requests', [DocumentRequestController::class, 'viewStudentRequests']);
 
 Route::get('/my-documents', [DocumentsController::class, 'showUserDocuments'])->name('myDocuments')->middleware('auth');
 // users

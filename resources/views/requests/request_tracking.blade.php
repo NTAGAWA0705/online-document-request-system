@@ -22,7 +22,27 @@
             Delivered
         </li> 
     </ul> 
-    <h5 class="text-center"><b>In transit</b>. The order has been shipped!</h5>
+    <h5 class="text-center">
+        @switch($request['status'])
+        @case(0)
+            <span class="badge badge-light">Pending</span>
+        @break
+        @case(1)
+            <span class="badge badge-light">Approved by finance, sent to VLAC</span>
+        @break
+        @case(2)
+            <span class="badge badge-light">Approved, Document ready</span>
+        @break
+        @case(-1)
+            <span class="badge badge-danger">Rejected your payment</span>
+            @break
+        @case(-2)
+        <span class="badge badge-danger">Rejected by VLAC</span>
+        @break
+        @default
+            
+    @endswitch
+    </h5>
 </div>
 @endsection
 

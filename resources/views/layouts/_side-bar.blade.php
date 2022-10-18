@@ -27,10 +27,16 @@
                                     <a class="nav-link" href="{{ route('myDocuments') }}"><i class="fa fa-fw fa-certificate"></i>My documents </a>
                                 </li>
                             @endcan
-
+                                
+                            @canany(['approve'])
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="/student-requests"><i class="fa fa-fw fa-user-graduate"></i> Incomming Requests</a>
+                                </li>
+                            @endcanany
+                           
                             @can('add_new_students')
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Student</a>
+                                    <a class="nav-link" href="{{ route('all_students') }}"><i class="fa fa-fw fa-user-graduate"></i>Students</a>
                                 </li>                                    
                             @endcan
                             @can('view_users')    
