@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DocumentRequestController;
+use App\Http\Controllers\DocumentsController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendMailController;
@@ -34,9 +35,11 @@ Route::get('/students/new', [StudentController::class, 'renderNewStudentForm'])-
 Route::post('/students/new', [StudentController::class, 'createStudent'])->middleware('auth');
 
 Route::get('/requests', [DocumentRequestController::class, 'renderAllRequests'])->name('requests')->middleware('auth');
+Route::get('/requests/tracker/{request_id}', [DocumentRequestController::class, 'renderTracker']);
 Route::get('/requests/transcripts/new', [DocumentRequestController::class, 'newTranscriptForm'])->name('newTranscriptForm')->middleware('auth');
 Route::post('/requests/transcripts/new', [DocumentRequestController::class, 'createNewTranscript'])->middleware('auth');
 
+Route::get('/my-documents', [DocumentsController::class, 'showUserDocuments'])->name('myDocuments')->middleware('auth');
 // users
 Route::get('/users', [UserController::class, 'renderAllUsers'])->name('allUsers')->middleware('auth');
 Route::get('/settings', [UserController::class, 'renderSettingPage'])->name('settings')->middleware('auth');

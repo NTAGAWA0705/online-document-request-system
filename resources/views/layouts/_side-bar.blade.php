@@ -24,7 +24,7 @@
                             @endcan
                             @can('request_document')
                                 <li class="nav-item ">
-                                    <a class="nav-link" href="{{ route('requests') }}"><i class="fa fa-fw fa-certificate"></i>My documents </a>
+                                    <a class="nav-link" href="{{ route('myDocuments') }}"><i class="fa fa-fw fa-certificate"></i>My documents </a>
                                 </li>
                             @endcan
 

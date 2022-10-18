@@ -15,4 +15,9 @@ class Docsinrequest extends Model
         'documentrequest_id',
         'doctype_id',
     ];
+
+    public function docRequest()
+    {
+        return $this->belongsTo(Documentrequest::class);
+    }
 }

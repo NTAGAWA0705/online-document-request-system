@@ -9,8 +9,15 @@ class Documentrequest extends Model
 {
     use HasFactory;
 
+    protected $table = "documentrequests";
+
     protected $fillable = [
         'status',
         'student_id'
     ];
+
+    public function docsInRequest()
+    {
+        return $this->hasMany(Docsinrequest::class);
+    }
 }

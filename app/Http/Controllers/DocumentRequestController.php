@@ -13,7 +13,10 @@ class DocumentRequestController extends Controller
 
     public function renderAllRequests()
     {
-        return view('requests.request_doc');
+        $userRequests = Documentrequest::all()->where('student_id', '=', auth()->user()->student->id);
+        return view('requests.request_doc', [
+            'myRequests' => $userRequests,
+        ]);
     }
 
     public function newTranscriptForm()
@@ -72,5 +75,13 @@ class DocumentRequestController extends Controller
 
 
         return redirect('/requests')->with('success', 'your new transcripts has been ordered');
+    }
+
+    public function renderTracker($request_id)
+    {
+        $status = Documentrequest::find($request_id, 'status');
+        return view('requests.request_tracking', [
+            'status' => $status,
+        ]);
     }
 }
