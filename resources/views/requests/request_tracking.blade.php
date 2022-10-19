@@ -17,7 +17,7 @@
             Finance </li> 
         <li class="step"> 
             <div><i class="fas fa-truck"></i></div> 
-            VLAC </li> <li class="step @if($req_status >= 2) active @endif"> 
+            VRAC </li> <li class="step @if($req_status >= 2) active @endif"> 
             <div><i class="fas fa-birthday-cake"></i></div> 
             Document Ready
         </li> 
@@ -37,7 +37,7 @@
             <span class="badge badge-danger">Rejected your payment</span>
             @break
         @case(-2)
-        <span class="badge badge-danger">Rejected by VLAC</span>
+        <span class="badge badge-danger">Rejected by VRAC</span>
         @break
         @default
             
