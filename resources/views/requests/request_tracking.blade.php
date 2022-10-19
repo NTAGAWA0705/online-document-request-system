@@ -23,7 +23,7 @@
         </li> 
     </ul> 
     <h5 class="text-center">
-        @switch($request['status'])
+        @switch($req_status)
         @case(0)
             <span class="badge badge-light">Pending</span>
         @break
