@@ -69,7 +69,7 @@
                             <input class="custom-control-input" type="checkbox" name="remember_me"><span class="custom-control-label">Remember Me</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-lg btn-block" style="background-color:rgb(48, 30, 124) !important;
+                    <button type="submit" class="btn btn-lg btn-block" style="background-color:rgb(38, 26, 88) !important;
                     color: rgb(243, 245, 238) !important;">Sign in</button>
                     @csrf
                 </form>
