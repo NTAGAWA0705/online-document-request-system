@@ -8,24 +8,24 @@
 
 <div class="card card-timeline px-2 border-none"> 
     <ul class="bs4-order-tracking"> 
-        <li class="step  active"> 
+        <li class="step @if($req_status >= 0) active @endif "> 
             <div><i class="fas fa-user"></i></div> 
             Pending 
         </li> 
-        <li class="step active"> 
+        <li class="step @if($req_status >= 1) active @endif"> 
             <div><i class="fas fa-bread-slice"></i></div> 
             Finance </li> 
         <li class="step"> 
             <div><i class="fas fa-truck"></i></div> 
-            VLAC </li> <li class="step "> 
+            VLAC </li> <li class="step @if($req_status >= 2) active @endif"> 
             <div><i class="fas fa-birthday-cake"></i></div> 
-            Delivered
+            Document Ready
         </li> 
     </ul> 
     <h5 class="text-center">
         @switch($req_status)
         @case(0)
-            <span class="badge badge-light">Pending</span>
+            <span class="badge badge-light">Pending </span>Your document has been sent to the finance office waiting for approval.
         @break
         @case(1)
             <span class="badge badge-light">Approved by finance, sent to VLAC</span>
