@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Notifier;
 use App\Models\Approval;
 use Illuminate\Http\Request;
 use App\Models\Docsinrequest;
 use App\Models\ProofOfPayment;
 use App\Models\Documentrequest;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\File;
 
 class DocumentRequestController extends Controller
@@ -112,6 +114,18 @@ class DocumentRequestController extends Controller
         $is_approved = $request->is_approved;
         $request_id = $request->request_id;
 
-        dd($approvalLevel, $request_id);
+        $user_info = explode(',', $request->user_info);
+
+        Approval::create(['is_approved' => $is_approved, 'request_id' => $request_id, 'approval_level' => $approvalLevel, 'user_id' => auth()->user()->id]);
+
+        $message['subject'] = "Updates on your transcript request";
+
+        if ($approvalLevel == 1) {
+            $message['body'] = "Regarding your transcript application, your request has been approved by the Finance department, currently sent to the VRAC office for approval. <br> Please look out for our email for updates";
+        } elseif ($approvalLevel == 2) {
+            $message['body'] = "Regarding your transcript application, your request has been approved by the VRAC office, your requested documents are now available to download, please head to our portal";
+        }
+
+        Mail::to($user_info['email_addr'])->send(new Notifier($user_info, $message));
     }
 }
