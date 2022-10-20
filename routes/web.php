@@ -50,7 +50,8 @@ Route::get('/settings', [UserController::class, 'renderSettingPage'])->name('set
 Route::get('/users/new', [UserController::class, 'create'])->name('new_user')->middleware('auth');
 Route::post('/users/new', [UserController::class, 'store'])->middleware('auth');
 
-
+Route::get('/settings', [UserController::class, 'renderUserUpdate'])->name('settings')->middleware('auth');
+Route::post('/settings', [UserController::class, 'userUpdate'])->name('settings')->middleware('auth');
 
 // testing
 Route::get('/mail', [MailController::class, 'html_mail']);

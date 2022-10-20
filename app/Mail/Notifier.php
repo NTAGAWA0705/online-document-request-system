@@ -17,9 +17,9 @@ class Notifier extends Mailable
      * @return void
      */
     public $message, $subject, $student_name, $student_email;
-    public function __construct($message, $recipient_info)
+    public function __construct($recipient_info, $message)
     {
-        $this->message = $message['message'];
+        $this->message = $message['body'];
         $this->subject = $message['subject'];
         $this->student_name = $recipient_info[0];
         $this->student_email = $recipient_info[1];

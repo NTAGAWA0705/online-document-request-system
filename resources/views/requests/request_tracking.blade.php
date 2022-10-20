@@ -15,9 +15,10 @@
         <li class="step @if($req_status >= 1) active @endif"> 
             <div><i class="fas fa-bread-slice"></i></div> 
             Finance </li> 
-        <li class="step"> 
+        <li class="step  @if($req_status >= 2) active @endif"> 
             <div><i class="fas fa-truck"></i></div> 
-            VRAC </li> <li class="step @if($req_status >= 2) active @endif"> 
+            VRAC </li> 
+        <li class="step @if($req_status >= 2) active @endif"> 
             <div><i class="fas fa-birthday-cake"></i></div> 
             Document Ready
         </li> 

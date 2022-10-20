@@ -30,4 +30,9 @@ class Documentrequest extends Model
     {
         return $this->belongsTo(Student::class);
     }
+
+    public function approval()
+    {
+        return $this->hasMany(Approval::class);
+    }
 }
