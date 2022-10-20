@@ -98,4 +98,17 @@ class UserController extends Controller
 
         return redirect('/users')->with('usr.success', 'the new user registered successfully');
     }
+
+    public function renderUserUpdate()
+    {
+        $settings = User::all()->where('id', '=', auth()->user()->id)->first();
+
+        return view('users.settings', [
+            'user_info' => $settings,
+        ]);
+    }
+
+    public function userUpdate(Request $request)
+    {
+    }
 }

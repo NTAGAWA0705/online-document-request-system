@@ -26,7 +26,11 @@
     <!-- ============================================================== -->
     <!-- end pageheader -->
     <!-- ============================================================== -->
-
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
@@ -56,10 +60,10 @@
                                         <td>{{ $i++ }}</td>
                                         <td>
                                             @if ($request->student !== NULL)
-                                                    {{ $request->student->fist_name . " " . $request->student->last_name  }}
-                                                @else
-                                                    {{"N/A"}}
-                                                @endif
+                                                {{ $request->student->fist_name . " " . $request->student->last_name  }}
+                                            @else
+                                                {{"N/A"}}
+                                            @endif
                                         </td>
                                         <td>{{ $request['created_at'] }}</td>
                                         <td>
@@ -74,7 +78,7 @@
                                         @can('validate_payment_proof')
                                             <td>
                                                 @if ($request->proof !== NULL)
-                                                    <a href="/{{$request->proof->slip_url}}" class="btn btn-link p-0">Payment proof</a>
+                                                    <a href="/storage/{{$request->proof->slip_url}}" class="btn btn-link p-0">Payment proof</a>
                                                 @else
                                                     {{"N/A"}}
                                                 @endif
@@ -102,21 +106,23 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
-                                                <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
-                                                <input type="hidden" name="user_info" value="{{ $request->student->fist_name . " " . $request->student->last_name . ',' . $request->student->user->email_addr }}">
-                                                <input type="hidden" name="is_approved" value="1">
-                                                <input type="hidden" name="request_id" value="{{ $request['id'] }}">
-                                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Approve</button>
-                                                @csrf
-                                            </form>
-                                            <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
-                                                <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
-                                                <input type="hidden" name="is_approved" value="0">                                                
-                                                <input type="hidden" name="request_id" value="{{ $request['id'] }}">
-                                                <button type="submit" class="btn btn-light border"><i class="fas fa-times-circle"></i> Reject</button>
-                                                @csrf
-                                            </form>
+                                            @if (isset($request->approval))
+                                                <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
+                                                    <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
+                                                    <input type="hidden" name="user_info" value="{{ $request->student->fist_name . " " . $request->student->last_name . ',' . $request->student->user->email_addr }}">
+                                                    <input type="hidden" name="is_approved" value="1">
+                                                    <input type="hidden" name="request_id" value="{{ $request['id'] }}">
+                                                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Approve</button>
+                                                    @csrf
+                                                </form>
+                                                <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
+                                                    <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
+                                                    <input type="hidden" name="is_approved" value="0">                                                
+                                                    <input type="hidden" name="request_id" value="{{ $request['id'] }}">
+                                                    <button type="submit" class="btn btn-light border"><i class="fas fa-times-circle"></i> Reject</button>
+                                                    @csrf
+                                                </form>
+                                            @endif
                                             <a href="/requests/tracker/{{ $request['id'] }}" class="btn btn-light btn-sm">View status</a>
                                         </td>
                                     </tr>                                    

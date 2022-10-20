@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Docsinrequest;
 use App\Models\ProofOfPayment;
 use App\Models\Documentrequest;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\File;
 
@@ -116,7 +117,12 @@ class DocumentRequestController extends Controller
 
         $user_info = explode(',', $request->user_info);
 
-        Approval::create(['is_approved' => $is_approved, 'request_id' => $request_id, 'approval_level' => $approvalLevel, 'user_id' => auth()->user()->id]);
+        Approval::create(['is_approved' => $is_approved, 'documentrequest_id' => $request_id, 'approval_level' => $approvalLevel, 'user_id' => auth()->user()->id]);
+        if ($is_approved) {
+            Documentrequest::where('id', '=', $request_id)->update(['status' => $approvalLevel]);
+        } else {
+            Documentrequest::where('id', '=', $request_id)->update(['status' => -$approvalLevel]);
+        }
 
         $message['subject'] = "Updates on your transcript request";
 
@@ -125,7 +131,13 @@ class DocumentRequestController extends Controller
         } elseif ($approvalLevel == 2) {
             $message['body'] = "Regarding your transcript application, your request has been approved by the VRAC office, your requested documents are now available to download, please head to our portal";
         }
-
-        Mail::to($user_info['email_addr'])->send(new Notifier($user_info, $message));
+        try {
+            $returnMessage = "The request has been approved";
+            Mail::to($user_info[1])->send(new Notifier($user_info, $message));
+        } catch (Exception $th) {
+            $returnMessage .= ", But, Your message failed to be sent due to mail server problems";
+        } finally {
+            return redirect('/student-requests')->with('success', $returnMessage);
+        }
     }
 }
