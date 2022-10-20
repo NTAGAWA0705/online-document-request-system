@@ -83,19 +83,19 @@
                                         <td class="align-right">
                                             @switch($request['status'])
                                                 @case(0)
-                                                    <span class="badge badge-light">Pending</span>
+                                                    <span class="badge badge-warning">Pending</span>
                                                 @break
                                                 @case(1)
-                                                    <span class="badge badge-light">Approved by finance, sent to VLAC</span>
+                                                    <span class="badge badge-warning">Approved by finance, sent to VRAC</span>
                                                 @break
                                                 @case(2)
-                                                    <span class="badge badge-light">Approved, Document ready</span>
+                                                    <span class="badge badge-warning">Approved, Document ready</span>
                                                 @break
                                                 @case(-1)
                                                     <span class="badge badge-danger">Rejected your payment</span>
                                                     @break
                                                 @case(-2)
-                                                <span class="badge badge-danger">Rejected by VLAC</span>
+                                                <span class="badge badge-danger">Rejected by VRAC</span>
                                                 @break
                                                 @default
                                                     
