@@ -11,7 +11,7 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
                             <li class="nav-divider">
-                                <a href="{{ route('home') }}"><img class="logo-img" src="{{ asset('images/odrs logo.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}"><img class="logo-img" src="{{ asset('images/NEWLOGO.PNG') }}" alt="logo"></a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('home') }}" style="background-color: rgb(27, 31, 61);"><i class="fa fa-fw fa-tachometer-alt"></i>Dashboard</a>
