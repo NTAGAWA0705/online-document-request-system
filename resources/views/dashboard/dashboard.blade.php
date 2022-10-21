@@ -30,7 +30,7 @@
                             <div class="card-body">
                                 <div class="d-inline-block">
                                     <h5 class="text-muted">Number of students</h5>
-                                    <h2 class="mb-0"> 150</h2>
+                                    <h2 class="mb-0"> <strong>{{ $nberOfStudents }}</strong></h2>
                                 </div>
                                 <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                     <i class="fa fa-user-graduate fa-fw fa-sm text-info"></i>
@@ -45,7 +45,7 @@
                             <div class="card-body">
                                 <div class="d-inline-block">
                                     <h5 class="text-muted">Number of total request</h5>
-                                    <h2 class="mb-0"> 16</h2>
+                                    <h2 class="mb-0"> <strong> {{$nberRequests}}</strong></h2>
                                 </div>
                                 <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                     <i class="fa fa-eye fa-fw fa-sm text-info"></i>
@@ -60,7 +60,7 @@
                             <div class="card-body">
                                 <div class="d-inline-block">
                                     <h5 class="text-muted">Number of pending request</h5>
-                                    <h2 class="mb-0"> 26</h2>
+                                    <h2 class="mb-0"> {{$pending}}</h2>
                                 </div>
                                 <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                     <i class="fa fa-eye fa-fw fa-sm text-info"></i>
@@ -75,7 +75,7 @@
                             <div class="card-body">
                                 <div class="d-inline-block">
                                     <h5 class="text-muted">Number of completed request</h5>
-                                    <h2 class="mb-0"> 156</h2>
+                                    <h2 class="mb-0"> {{$completed}}</h2>
                                 </div>
                                 <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                     <i class="fa fa-eye fa-fw fa-sm text-info"></i>

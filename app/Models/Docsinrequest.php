@@ -20,4 +20,9 @@ class Docsinrequest extends Model
     {
         return $this->belongsTo(Documentrequest::class);
     }
+
+    public function doctype()
+    {
+        return $this->belongsTo(Doctype::class);
+    }
 }

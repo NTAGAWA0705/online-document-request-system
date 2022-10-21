@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Docsinrequest;
 use App\Models\ProofOfPayment;
 use App\Models\Documentrequest;
+use App\Models\Generateddoc;
 use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\File;
@@ -84,8 +85,10 @@ class DocumentRequestController extends Controller
     public function renderTracker($request_id)
     {
         $status = Documentrequest::find($request_id, 'status');
+        $approvals = Approval::all()->where('documentrequest_id', '=', $request_id);
         return view('requests.request_tracking', [
             'status' => $status,
+            'approvalHistory' => $approvals,
         ]);
     }
 
@@ -130,6 +133,12 @@ class DocumentRequestController extends Controller
             $message['body'] = "Regarding your transcript application, your request has been approved by the Finance department, currently sent to the VRAC office for approval. <br> Please look out for our email for updates";
         } elseif ($approvalLevel == 2) {
             $message['body'] = "Regarding your transcript application, your request has been approved by the VRAC office, your requested documents are now available to download, please head to our portal";
+
+            Generateddoc::create([
+                'docsinrequest_id' => $request_id,
+                'student_id' => $user_info[2],
+                'doc_url' => '',
+            ]);
         }
         try {
             $returnMessage = "The request has been approved";

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Department;
 use App\Models\DepartmentStaff;
 use App\Models\Staff;
+use App\Models\Student;
 use App\Models\SystemAdministrator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -52,18 +53,7 @@ class UserController extends Controller
         ]);
 
         // dd(bcrypt($request->password));
-        $userrole = "";
-
-        if ($request->user_type === 'finance') {
-            $userrole = "Finance Officer";
-        } elseif ($request->user_type === 'department') {
-            $userrole = "Department Admin";
-        } elseif ($request->user_type === 'vlac') {
-            $userrole = "TOP Ac Officer / VLAC";
-        } elseif ($request->user_type === 'admin') {
-            $userrole = "System Administrator";
-        }
-
+        $userrole = $request->user_type;
 
         $user = User::create([
             'email_addr' => $request->email,
@@ -103,12 +93,32 @@ class UserController extends Controller
     {
         $settings = User::all()->where('id', '=', auth()->user()->id)->first();
 
-        return view('users.settings', [
+        return view('students.updateStudent', [
             'user_info' => $settings,
         ]);
     }
 
     public function userUpdate(Request $request)
     {
+        $user_id = $request->user_id;
+        if ($request->has('fname')) {
+            $fname = $request->fname;
+            $lname = $request->lname;
+
+            Student::where('user_id', '=', $request->user_id)->update([
+                'first_name' => $fname,
+                'last_name' => $lname,
+            ]);
+            if ($request->has('ref_number')) {
+                Student::where('user_id', '=', $user_id)->update(['ref_number' => $request->ref_number]);
+            }
+        }
+
+        User::where('id', '=', $user_id)->update(['email_addr' => $request->email]);
+        if ($request->has('password')) {
+            User::where('id', '=', $user_id)->update(['password' => bcrypt($request->password)]);
+        }
+
+        return back()->with('success', 'Information updated successfully!');
     }
 }

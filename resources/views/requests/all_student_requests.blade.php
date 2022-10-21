@@ -109,7 +109,7 @@
                                             @if (isset($request->approval))
                                                 <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
                                                     <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
-                                                    <input type="hidden" name="user_info" value="{{ $request->student->fist_name . " " . $request->student->last_name . ',' . $request->student->user->email_addr }}">
+                                                    <input type="hidden" name="user_info" value="{{ $request->student->fist_name . " " . $request->student->last_name . ',' . $request->student->user->email_addr . ',' . $request->student->id }}">
                                                     <input type="hidden" name="is_approved" value="1">
                                                     <input type="hidden" name="request_id" value="{{ $request['id'] }}">
                                                     <button type="submit" class="btn btn-primary"><i class="fas fa-plus-circle"></i> Approve</button>

@@ -11,7 +11,8 @@
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav flex-column">
                             <li class="nav-divider">
-                                <a href="{{ route('home') }}"><img class="logo-img" src="{{ asset('images/odrs logo.png') }}" alt="logo"></a>
+                                <a href="{{ route('home') }}">
+                                    <img class="logo-img" src="{{ asset('images/NEWLOGO.PNG') }}" alt="logo"></a>
                             </li>
                             <li class="nav-item ">
                                 <a class="nav-link" href="{{ route('home') }}" style="background-color: rgb(27, 31, 61);"><i class="fa fa-fw fa-tachometer-alt"></i>Dashboard</a>
@@ -41,10 +42,10 @@
                             @endcan
                             @can('view_users')    
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#users" aria-controls="users">
                                         <i class="fas fa-fw fa-chart-pie"></i> Users
                                     </a>
-                                    <div id="submenu-8" class="collapse submenu">
+                                    <div id="users" class="collapse submenu">
                                         <ul class="nav flex-column">
                                             <li class="nav-item">
                                                 <a class="nav-link" href="{{ route('allUsers') }}">All users</a>
@@ -60,33 +61,36 @@
                             @endcan
                             @can('manage_courses')
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#courses" aria-controls="courses">
                                     <i class="fas fa-fw fa-chart-pie"></i> Manage Courses
                                 </a>
-                                <div id="submenu-8" class="collapse submenu">
+                                <div id="courses" class="collapse submenu">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('allUsers') }}">All courses</a>
+                                            <a class="nav-link" href="{{ route('courses') }}">All courses</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">Create new course</a>
+                                            <a class="nav-link" href="{{ route('new_course') }}">Create new course</a>
                                         </li>                                                
                                     </ul>
                                 </div>
                             </li> 
+                            <li class="nav-item ">
+                                <a class="nav-link" href="{{ route('import_grades') }}"><i class="fa fa-fw fa-chart-pie"></i>Import student marks</a>
+                            </li>  
                             @endcan
                             @can('manage_departments')
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-8" aria-controls="submenu-8">
+                                <a class="nav-link" href="{{ route('departments') }}" data-toggle="collapse" aria-expanded="false" data-target="#departments" aria-controls="departments">
                                     <i class="fas fa-fw fa-chart-pie"></i> Manage Departments
                                 </a>
-                                <div id="submenu-8" class="collapse submenu">
+                                <div id="departments" class="collapse submenu">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="{{ route('allUsers') }}">All departments</a>
+                                            <a class="nav-link" href="{{ route('departments') }}">All departments</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="">Create new department</a>
+                                            <a class="nav-link" href="{{ route('new_dept') }}">Create new department</a>
                                         </li>                                                
                                     </ul>
                                 </div>

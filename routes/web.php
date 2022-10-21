@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\DocumentsController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\SendMailController;
@@ -22,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function () {
-    return view('dashboard.dashboard');
-})->name('home')->middleware('auth');
+Route::get('/', [DashboardController::class, 'create'])->name('home')->middleware('auth');
 
 Route::get('/login', [LoginController::class, 'renderLogin'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'loginUser'])->middleware('guest');
@@ -52,6 +54,19 @@ Route::post('/users/new', [UserController::class, 'store'])->middleware('auth');
 
 Route::get('/settings', [UserController::class, 'renderUserUpdate'])->name('settings')->middleware('auth');
 Route::post('/settings', [UserController::class, 'userUpdate'])->name('settings')->middleware('auth');
+
+Route::get('/transcripts/{doc_id}', [DocumentsController::class, 'renderTranscript'])->name('download_transcript');
+
+Route::get('/departments', [DepartmentController::class, 'all'])->name('departments');
+Route::get('/departments/new', [DepartmentController::class, 'create'])->name('new_dept');
+Route::post('/departments/new', [DepartmentController::class, 'store']);
+
+Route::get('/courses', [CourseController::class, 'all'])->name('courses')->middleware('auth');
+Route::get('/courses/new', [CourseController::class, 'create'])->name('new_course')->middleware('auth');
+Route::post('/courses/new', [CourseController::class, 'store']);
+
+Route::get('/grades/import', [GradeController::class, 'create'])->name('import_grades')->middleware('auth');
+Route::post('/grades/import', [GradeController::class, 'store']);
 
 // testing
 Route::get('/mail', [MailController::class, 'html_mail']);
