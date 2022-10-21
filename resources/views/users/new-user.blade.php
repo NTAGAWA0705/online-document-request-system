@@ -73,7 +73,7 @@
                                         <option disabled selected>Select</option>
                                         <option value="finance">Finance Officer</option>
                                         <option value="department">Department admin</option>
-                                        <option value="vlac">Top academic officer / VLAC</option>
+                                        <option value="vlac">Top academic officer / VRAC</option>
                                         <option value="admin">System Administrator</option>
                                     </select>
                                 </div>

@@ -20,20 +20,22 @@ class DocumentsController extends Controller
 
     public function renderTranscript($doc_id)
     {
-        // $documentId = $doc_id;
-        // $docObj = Generateddoc::all()->where('id', '=', $documentId)->first();
+        $documentId = $doc_id;
+        $docObj = Generateddoc::all()->where('id', '=', $documentId)->first();
 
-        // $student_id = $docObj->student_id;
+        $student_id = $docObj->student_id;
 
 
-        $data = [
-            'title' => 'Welcome to ItSolutionStuff.com',
-            'date' => date('m/d/Y')
-        ];
 
-        $pdf = PDF::loadView('docs.transcript', $data);
 
-        return $pdf->download('itsolutionstuff.pdf');
+        // $data = [
+        //     'title' => 'Welcome to ItSolutionStuff.com',
+        //     'date' => date('m/d/Y')
+        // ];
+
+        // $pdf = PDF::loadView('docs.transcript', $data);
+
+        // return $pdf->download('itsolutionstuff.pdf');
     }
 
     public function generateTranscript()

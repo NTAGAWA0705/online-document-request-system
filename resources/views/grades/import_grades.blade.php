@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-body">
             <h2>Import student grades</h2>
-            <a href="{{asset('marks_import_form.csv')}}">Download a form</a>
+            <a href="{{asset('marks_import_form.csv')}}" class="text-primary">Download a form</a>
     
             <form action="{{ route('import_grades') }}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
