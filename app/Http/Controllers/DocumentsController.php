@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Generateddoc;
+use App\Models\Student;
+use App\Models\StudentCourse;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 
@@ -26,9 +28,18 @@ class DocumentsController extends Controller
             return back()->with('message', 'No transcript found!');
         }
         $student_id = $docObj->student_id;
+        $student = Student::all()->where('id', '=', $student_id)->first();
         $request_id = $docObj->docsinrequest_id;
         $year = $docObj->docsinrequest->docRequest;
 
+        $courses = StudentCourse::all()->where('student_id', '=', $student_id);
+
+        return view('docs.transcript', [
+            'courses' => $courses,
+            'year' => $year,
+            'doc_id' => $doc_id,
+            'student' => $student,
+        ]);
 
 
 

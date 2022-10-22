@@ -54,9 +54,9 @@
                                             <td>{{ ($docsInreq) ? $docsInreq->doctype->name : 'Transcript' }} | year {{ $doc->docsinrequest->college_year }}</td>
                                             <td>{{ $doc['created_at']->format('d/m/Y, H:i') }}</td>
                                             <td class="align-right">
-                                                <a href="{{ route('download_transcript', $doc->id) }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a>
+                                                <a href="{{ route('download_transcript', $doc->id) }}" class="btn btn-primary"><i class="fas fa-print"></i> Print</a>
                                             </td>
-                                        </tr>                                    
+                                        </tr>
                                     @endforeach                           
                                 @else
                                         <div class="alert alert-light">
