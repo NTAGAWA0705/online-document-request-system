@@ -27,9 +27,7 @@ class DocumentsController extends Controller
         }
         $student_id = $docObj->student_id;
         $request_id = $docObj->docsinrequest_id;
-
-        dd($docObj);
-        $year = $docObj->docsInRequest->docRequest;
+        $year = $docObj->docsinrequest->docRequest;
 
 
 

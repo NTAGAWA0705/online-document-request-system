@@ -9,8 +9,8 @@ class Generateddoc extends Model
 {
     use HasFactory;
 
-    public function docsInRequest()
+    public function docsinrequest()
     {
-        return $this->belongsTo(Docsinrequest::class);
+        return $this->belongsTo(Docsinrequest::class, 'docsinrequest_id');
     }
 }

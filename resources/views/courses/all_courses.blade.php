@@ -45,6 +45,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Course Name</th>
+                                    <th scope="col">Course ID</th>
                                     <th scope="col">Department</th>
                                     <th scope="col">Year</th>
                                     <th scope="col">Credits</th>
@@ -59,6 +60,7 @@
                                         <tr>
                                             <td> {{ $i++ }} </td>
                                             <td>{{ $course['course_name'] }}</td>
+                                            <td> {{ $course->id }} </td>
                                             <td>{{ $course->department->department_name }}</td>
                                             <td>{{ $course['year'] }}</td>
                                             <td>{{ $course['credits'] }}</td>
