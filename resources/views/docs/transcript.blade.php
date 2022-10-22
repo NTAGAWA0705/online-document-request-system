@@ -1,3 +1,9 @@
+@if (auth()->user())
+    <script>
+        window.print()
+    </script>
+@endif
+
 {{-- https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.showrwanda.com --}}
 <!DOCTYPE html>
 <html lang="en">
