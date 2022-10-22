@@ -43,6 +43,7 @@
                                     <th scope="col">#</th>
                                     <th scope="col">Student Name</th>
                                     <th scope="col">Date</th>
+                                    <th scope="col">Documents</th>
                                     @can('validate_payment_proof')
                                         <th scope="col">Proof of payment</th>
                                     @endcan
@@ -78,7 +79,7 @@
                                         @can('validate_payment_proof')
                                             <td>
                                                 @if ($request->proof !== NULL)
-                                                    <a href="/storage/{{$request->proof->slip_url}}" class="btn btn-link p-0">Payment proof</a>
+                                                    <a href="{{ asset('uploads/' . $request->proof->slip_url) }}" class="btn btn-link p-0">Payment proof</a>
                                                 @else
                                                     {{"N/A"}}
                                                 @endif
@@ -106,7 +107,23 @@
                                             @endswitch
                                         </td>
                                         <td>
-                                            @if (isset($request->approval))
+                                            @php
+                                                $show = null;
+                                                if ($request->status == 0) {
+                                                    if ($levelApproval == 1) {
+                                                        $show = true;
+                                                    } else {
+                                                        $show = false;
+                                                    }
+                                                } elseif ($request->status == 1) {
+                                                    if ($levelApproval == 2) {
+                                                        $show = true;
+                                                    } else {
+                                                        $show = false;
+                                                    }
+                                                }
+                                            @endphp
+                                            @if ($show)
                                                 <form action="/approve-student-request" class="d-inline m-0 p-0" method="post">
                                                     <input type="hidden" name="approvalLevel" value="{{ $levelApproval }}">
                                                     <input type="hidden" name="user_info" value="{{ $request->student->fist_name . " " . $request->student->last_name . ',' . $request->student->user->email_addr . ',' . $request->student->id }}">

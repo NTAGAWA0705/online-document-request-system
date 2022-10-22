@@ -42,7 +42,7 @@
     <div class="splash-container">
         <div class="card ">
             <div class="card-header text-center">
-                <a href="index.html"><img class="logo-img" src="{{asset('images/NEWLOGO.png')}}" alt="logo"></a>
+                <a href="/"><img class="logo-img" src="{{asset('images/NEWLOGO.png')}}" alt="logo"></a>
             </div>
             <div class="card-body">
                 <form method="POST" action="{{ route('login') }}">

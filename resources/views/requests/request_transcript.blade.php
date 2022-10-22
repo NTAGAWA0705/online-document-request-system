@@ -348,13 +348,13 @@
         font: 500 13px/1 "Roboto", sans-serif;
         }
         .multi_step_form #msform #progressbar li:nth-child(2):before {
-        content: "\f12f";
+        content: " ";
         }
         .multi_step_form #msform #progressbar li:nth-child(3):before {
-        content: "\f457";
+        content: " ";
         }
         .multi_step_form #msform #progressbar li:before {
-        content: "\f1fa";
+        content: " ";
         font: normal normal normal 30px/50px Ionicons;
         width: 50px;
         height: 50px;
@@ -418,12 +418,12 @@
 
     @section('foot')
 
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
 <script>
-       <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
-    $(document).ready(function() {
-        $('.select-docs').select2();
-    });
+        $(document).ready(function() {
+            $('.select-docs').select2();
+        });
 </script>
 
         <script>
@@ -526,24 +526,9 @@
             return false;
         })
     }; 
-    
-    //* Add Phone no select
-    function phoneNoselect(){
-        if ( $('#msform').length ){   
-            $("#phone").intlTelInput(); 
-            $("#phone").intlTelInput("setNumber", "+880"); 
-        };
-    }; 
-    //* Select js
-    function nice_Select(){
-        if ( $('.product_select').length ){ 
-            $('select').niceSelect();
-        };
-    }; 
+
     /*Function Calls*/  
     verificationForm ();
-    phoneNoselect ();
-    nice_Select ();
 })(jQuery);
         </script>    
         

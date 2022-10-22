@@ -60,7 +60,7 @@ class DocumentRequestController extends Controller
         if ($request->file('proof')) {
             $file = $request->file('proof');
             $fileName = time() . '_' . uniqid() . $file->getClientOriginalName();
-            $filePath = $request->file('proof')->storeAs('uploads', $fileName, 'public');
+            $filePath = $request->file('proof')->storeAs('proof-of-payments', $fileName, 'public');
         }
 
         $file_url = $filePath;
@@ -103,7 +103,7 @@ class DocumentRequestController extends Controller
 
         $can_be_approved = Approval::all()->where('approval_level', '=', $approval_level)->where('request_id', '=', 5)->count();
 
-        $userRequests = Documentrequest::all()->where('status', '<=', $approval_level);
+        $userRequests = Documentrequest::all()->where('status', '<', $approval_level)->where('status', '>=', 0);
 
         return view('requests.all_student_requests', [
             'studentsRequests' => $userRequests,
@@ -133,12 +133,16 @@ class DocumentRequestController extends Controller
             $message['body'] = "Regarding your transcript application, your request has been approved by the Finance department, currently sent to the VRAC office for approval. <br> Please look out for our email for updates";
         } elseif ($approvalLevel == 2) {
             $message['body'] = "Regarding your transcript application, your request has been approved by the VRAC office, your requested documents are now available to download, please head to our portal";
-
-            Generateddoc::create([
-                'docsinrequest_id' => $request_id,
-                'student_id' => $user_info[2],
-                'doc_url' => '',
-            ]);
+            $docsInReq = Docsinrequest::all()->where('documentrequest_id', '=', $request_id);
+            if ($docsInReq) {
+                foreach ($docsInReq as $doc) {
+                    Generateddoc::create([
+                        'docsinrequest_id' => $doc->id,
+                        'student_id' => $user_info[2],
+                        'doc_url' => '',
+                    ]);
+                }
+            }
         }
         try {
             $returnMessage = "The request has been approved";

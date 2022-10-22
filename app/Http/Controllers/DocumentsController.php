@@ -22,8 +22,14 @@ class DocumentsController extends Controller
     {
         $documentId = $doc_id;
         $docObj = Generateddoc::all()->where('id', '=', $documentId)->first();
-
+        if (!$docObj) {
+            return back()->with('message', 'No transcript found!');
+        }
         $student_id = $docObj->student_id;
+        $request_id = $docObj->docsinrequest_id;
+
+        dd($docObj);
+        $year = $docObj->docsInRequest->docRequest;
 
 
 

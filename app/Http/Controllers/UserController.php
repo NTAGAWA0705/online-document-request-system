@@ -26,10 +26,15 @@ class UserController extends Controller
     public function renderSettingPage()
     {
         $user_data = [];
-
-        return view('users.settings', [
-            'user_data' => $user_data,
-        ]);
+        if (auth()->user()->user_type !== 'student') {
+            return view('users.update_staff', [
+                'user_data' => $user_data,
+            ]);
+        } else {
+            return view('users.settings', [
+                'user_data' => $user_data,
+            ]);
+        }
     }
 
     public function create()
@@ -93,9 +98,15 @@ class UserController extends Controller
     {
         $settings = User::all()->where('id', '=', auth()->user()->id)->first();
 
-        return view('students.updateStudent', [
-            'user_info' => $settings,
-        ]);
+        if (auth()->user()->user_type !== 'student') {
+            return view('users.update_staff', [
+                'user_info' => $settings,
+            ]);
+        } else {
+            return view('students.updateStudent', [
+                'user_info' => $settings,
+            ]);
+        }
     }
 
     public function userUpdate(Request $request)
@@ -109,9 +120,19 @@ class UserController extends Controller
                 'first_name' => $fname,
                 'last_name' => $lname,
             ]);
-            if ($request->has('ref_number')) {
-                Student::where('user_id', '=', $user_id)->update(['ref_number' => $request->ref_number]);
-            }
+        }
+        if ($request->has('ref_number')) {
+            Student::where('user_id', '=', $user_id)->update(['ref_number' => $request->ref_number]);
+        } elseif ($request->has('user_type') && $request->user_type == 'staff') {
+            Staff::where('user_id', '=', $request->user_id)->update([
+                'first_name' => $fname,
+                'last_name' => $lname,
+            ]);
+        } elseif ($request->has('user_type') && $request->user_type == 'admin') {
+            Staff::where('user_id', '=', $request->user_id)->update([
+                'first_name' => $fname,
+                'last_name' => $lname,
+            ]);
         }
 
         User::where('id', '=', $user_id)->update(['email_addr' => $request->email]);

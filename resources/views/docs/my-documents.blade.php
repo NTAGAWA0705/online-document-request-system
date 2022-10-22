@@ -54,7 +54,7 @@
                                             <td>{{ ($docsInreq) ? $docsInreq->doctype->name : 'Transcript' }}</td>
                                             <td>{{ $doc['created_at']->format('d/m/Y, H:i') }}</td>
                                             <td class="align-right">
-                                                <a href="{{ route('download_transcript', 22) }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a>
+                                                <a href="{{ route('download_transcript', $doc->id) }}" class="btn btn-primary"><i class="fas fa-download"></i> Download</a>
                                             </td>
                                         </tr>                                    
                                     @endforeach                           
