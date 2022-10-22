@@ -44,7 +44,8 @@
                             </thead>
                             <tbody>
                                 @if (isset( $myDocs) || count($myDocs) > 0)
-                                @php $i = 1; @endphp
+                                @php $i = 1; 
+                                @endphp
                                     @foreach ($myDocs as $doc)
                                         <tr>
                                             <td>{{ $i++ }}</td>

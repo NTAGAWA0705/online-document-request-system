@@ -49,7 +49,16 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                            
+                        @endphp
+
+
                         @foreach ($courses as $course)
+                        @php
+                            $total += $course->course->grade->marks;
+                        @endphp
                             <tr>
                                 <td>{{$course->course_id}}</td>
                                 <td>{{$course->course->course_name}}</td>
@@ -59,6 +68,10 @@
                                 <td><strong>{{ (float) $course->course->grade->marks * $course->course->credits }}</strong></td>
                             </tr>                            
                         @endforeach
+                        <tr>
+                            <td colspan="5">Total</td>
+                            <td>{{ $total }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
