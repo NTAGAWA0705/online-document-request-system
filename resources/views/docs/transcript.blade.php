@@ -1,3 +1,9 @@
+@if (auth()->user())
+    <script>
+        window.print()
+    </script>
+@endif
+
 {{-- https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.showrwanda.com --}}
 <!DOCTYPE html>
 <html lang="en">
@@ -12,26 +18,26 @@
     <title>Transcript</title>
 </head>
 <body>
-    <main class="container-fluid bg-white">
+    <main class="container bg-white">
         <div class="header">
             <h1 class="text-center">ACADEMIC TRANSCRIPT</h1>
             <div class="d-flex justify-content-around">
                 <div class="left">
-                    <div class="">Surname: <b>CYUZUZO</b></div>
-                    <div class="">First Name: <b>Jean Remy</b></div>
+                    <div class="">Surname: <b>{{ $student->last_name }}</b></div>
+                    <div class="">First Name: <b>{{ $student->first_name }}</b></div>
                     <div class="">Academic year: <b>2021-2022</b></div>
-                    <div class="">Reg N<sup>0</sup>: <b>20/15177</b></div>
+                    <div class="">Reg N<sup>0</sup>: <b>{{ $student->ref_number }}</b></div>
                     <div class="">ID N<sup>0</sup>: <b>1199922625172781</b></div>
                 </div>
                 <div class="right">
                     <div class="">Faculty: <b>Applied Fundamental Sciences</b></div>
-                    <div class="">First Name: <b>Jean Remy</b></div>
-                    <div class="">Academic year: <b>2021-2022</b></div>
-                    <div class="">Reg N<sup>0</sup>: <b>20/15177</b></div>
+                    <div class="">Department: <b>Computer Science</b></div>
+                    <div class="">Level: <b>III</b></div>
+                    <div class="">Option: <b>Software Engineering</b></div>
                 </div>
             </div>
             <div class="my-2">
-                <table class="table table-bordered" style="border-color: black">
+                <table class="table table-bordered border-dark" style="border-color: black">
                     <thead>
                         <tr>
                             <th>Module Code</th>
@@ -43,50 +49,38 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @php
+                            $total = 0;
+                            
+                        @endphp
+
+
+                        @foreach ($courses as $course)
+                        @php
+                            $total += $course->course->grade->marks;
+                        @endphp
+                            <tr>
+                                <td>{{$course->course_id}}</td>
+                                <td>{{$course->course->course_name}}</td>
+                                <td>{{$course->course->course_name}}</td>
+                                <td>{{$course->course->credits}}</td>
+                                <td><strong>{{ $course->course->grade->marks }}</strong></td>
+                                <td><strong>{{ (float) $course->course->grade->marks * $course->course->credits }}</strong></td>
+                            </tr>                            
+                        @endforeach
                         <tr>
-                            <td colspan="6"><h2>LEVEL III</h2></td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
+                            <td colspan="5">Total</td>
+                            <td>{{ $total }}</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="signatures d-flex justify-content-around">
-                <div class="names">
-                    <b>Deputy DVCAR</b>
+            <div class="signatures d-flex justify-content-around align-items-center">
+                <div class="names text-center">
+                    <b><i>Signed digitally by Deputy Vice Chancellor Academics and Research<br /> Dr SINDAYIGAYA Samuel</i>
                 </div>
                 <div class="sgnature">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.showrwanda.com" alt="">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://{{ env('APP_URL') . '/transcripts/'. $doc_id .'/' }}" alt="QR Code">
                 </div>
             </div>
         </div>

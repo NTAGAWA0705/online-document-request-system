@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Student;
+use App\Models\StudentCourse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +65,10 @@ class GradeController extends Controller
                         'student_id' => $studentId->id,
                         'course_id' => $importData[2],
                         'marks' => $importData[3],
+                    ]);
+                    StudentCourse::create([
+                        'student_id' => $studentId->id,
+                        'course_id' => $importData[2]
                     ]);
                     DB::commit();
                 } catch (\Exception $e) {

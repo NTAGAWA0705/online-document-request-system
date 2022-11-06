@@ -16,7 +16,7 @@ class Documentrequest extends Model
         'student_id'
     ];
 
-    public function docsInRequest()
+    public function docsinrequest()
     {
         return $this->hasMany(Docsinrequest::class);
     }

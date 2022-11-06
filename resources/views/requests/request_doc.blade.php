@@ -31,8 +31,8 @@
                                         <td>{{ $i++ }}</td>
                                         <td>{{ $request['created_at'] }}</td>
                                         <td>
-                                            @if ($request->docsInRequest != null)
-                                                @foreach ($request->docsInRequest as $doc)
+                                            @if ($request->docsinrequest != null)
+                                                @foreach ($request->docsinrequest as $doc)
                                                     <span class="badge badge-light">{{ 'transcript . year:' . $doc->college_year }}</span>
                                                 @endforeach
                                             @else
